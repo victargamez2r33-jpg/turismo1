@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa de Valle - Choluteca Turística</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-dark: #0f172a;
+            --accent-gold: #f59e0b;
+            --accent-amber: #d97706;
+            --brand-blue: #0284c7;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.18);
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- ENCABEZADO RESPONSIVO --- */
+        .encabezado {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 6%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: var(--font-title);
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-gold) 100%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--accent-gold);
+            border-radius: 6px;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            padding: 7px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        .navegacion {
+            display: flex;
+            align-items: center;
+        }
+
+        .navegacion ul {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+        }
+
+        .navegacion a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .navegacion a:hover, .navegacion a.activo {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-lugar {
+            position: relative;
+            height: 55vh;
+            min-height: 380px;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%),
+                        url('img/CASA-VALLE.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 6% 3rem;
+            color: #ffffff;
+        }
+
+        .hero-contenido {
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .insignia-categoria {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+        }
+
+        .hero-contenido h2 {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .hero-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            color: #f1f5f9;
+        }
+
+        /* --- CONTENEDOR EN GRID --- */
+        .contenedor-principal {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 35px;
+        }
+
+        .tarjeta-detalle {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-color);
+        }
+
+        .tarjeta-detalle h2 {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .tarjeta-detalle p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .galeria-preview {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin: 25px 0;
+            cursor: pointer;
+        }
+
+        .galeria-preview img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .galeria-preview:hover img {
+            transform: scale(1.03);
+        }
+
+        .overlay-ampliar {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* BARRA LATERAL STICKY */
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .info-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-list li {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-list strong {
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .btn-whatsapp-action {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-family: var(--font-title);
+            transition: var(--transition);
+        }
+
+        .btn-whatsapp-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* ACORDEÓN DE PREGUNTAS FRECUENTES */
+        .faq-seccion {
+            margin-top: 35px;
+        }
+
+        .faq-seccion h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        details {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        summary {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        details p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* MODAL LIGHTBOX */
+        .modal-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .pie-pagina {
+            background: var(--primary-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            font-size: 0.95rem;
+            margin-top: auto;
+            border-top: 1px solid #1e293b;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-toggle { display: block; }
+            .navegacion {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .navegacion.abierto { max-height: 250px; }
+            .navegacion ul {
+                flex-direction: column;
+                padding-top: 15px;
+                gap: 10px;
+                width: 100%;
+            }
+            .hero-contenido h2 { font-size: 2.2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="logo">
+            <div class="logo-box">
+                <img src="img/logo de choluteca.png" alt="Escudo del Instituto José Cecilio del Valle">
+            </div>
+            <div class="logo-texto">
+                <h1>Choluteca Turística</h1>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navegacion" id="navMenu">
+            <ul>
+                <li><a href="que-visitar.html" class="activo">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="hero-lugar">
+        <div class="hero-contenido">
+            <span class="insignia-categoria">📜 Museo y Patrimonio Nacional</span>
+            <h2>Casa de Valle / Museo Histórico</h2>
+            <div class="hero-rating">
+                <span>★★★★★ 4.9 (180+ opiniones)</span>
+                <span>• Choluteca, Honduras</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="contenedor-principal">
+        <div class="layout-grid">
+            
+            <!-- DETALLES E HISTORIA -->
+            <article class="tarjeta-detalle">
+                <h2>Cuna del Prócer José Cecilio del Valle</h2>
+                <p>La Casa de Valle es la emblemática residencia colonial donde nació el sabio José Cecilio del Valle en 1776, redactor del Acta de Independencia de Centroamérica. Esta casona es uno de los monumentos históricos nacionales más preciados de Honduras.</p>
+                
+                <p>Actualmente funciona como museo y centro cultural público, conservando intactos sus amplios patios interiores, tejados de barro original, pisos centenarios y galerías donde se exhiben documentos y utensilios de la época colonial.</p>
+
+                <!-- GALERÍA / FOTO INTERACTIVA -->
+                <div class="galeria-preview" onclick="abrirLightbox()">
+                    <img id="imgPrincipal" src="img/CASA-VALLE.png" alt="Casa de Valle Museo" loading="lazy">
+                    <div class="overlay-ampliar">🔍 Haz clic para ampliar</div>
+                </div>
+
+                <!-- PREGUNTAS FRECUENTES -->
+                <div class="faq-seccion">
+                    <h3>Preguntas Frecuentes</h3>
+                    <details>
+                        <summary>¿Se ofrecen recorridos guiados?</summary>
+                        <p>Sí, hay guías locales disponibles para explicar la historia del prócer y los detalles arquitectónicos de la casona.</p>
+                    </details>
+                    <details>
+                        <summary>¿Tiene costo la entrada al museo?</summary>
+                        <p>La entrada es gratuita, aunque se aceptan aportaciones voluntarias destinadas al mantenimiento de la casona.</p>
+                    </details>
+                    <details>
+                        <summary>¿Se pueden realizar fotografías en el interior?</summary>
+                        <p>Está permitido tomar fotografías sin flash en las áreas comunes y salas del museo.</p>
+                    </details>
+                </div>
+            </article>
+
+            <!-- BARRA LATERAL DE INFORMACIÓN -->
+            <aside class="sidebar-card">
+                <h3>Información de Visita</h3>
+                <ul class="info-list">
+                    <li>
+                        <strong>Ubicación</strong>
+                        Calle de las Carreras, Centro Histórico de Choluteca.
+                    </li>
+                    <li>
+                        <strong>Horario</strong>
+                        Lunes a Viernes de 8:00 AM a 4:00 PM.
+                    </li>
+                    <li>
+                        <strong>Entrada</strong>
+                        Gratuita / Aportación Voluntaria
+                    </li>
+                    <li>
+                        <strong>Servicios</strong>
+                        Visitas guiadas, centro cultural y exposiciones.
+                    </li>
+                </ul>
+
+                <a href="https://wa.me/50427820000?text=Hola,%20deseo%20más%20información%20sobre%20las%20visitas%20a%20la%20Casa%20de%20Valle" target="_blank" class="btn-whatsapp-action">
+                    💬 Consultar por WhatsApp
+                </a>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- VISOR LIGHTBOX -->
+    <div id="lightboxModal" class="modal-lightbox" onclick="cerrarLightbox()">
+        <span class="cerrar-modal">&times;</span>
+        <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Choluteca Turística. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT INTERACTIVO -->
+    <script>
+        // Menú Móvil
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('abierto');
+        });
+
+        // Visor Lightbox
+        function abrirLightbox() {
+            const src = document.getElementById('imgPrincipal').src;
+            document.getElementById('imagenAmpliada').src = src;
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function cerrarLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

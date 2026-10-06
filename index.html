@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choluteca - La Sultana del Sur</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --color-primario: #0284c7;
+            --color-primario-oscuro: #0369a1;
+            --color-acento: #ea580c;
+            --color-acento-hover: #c2410c;
+            --color-secundario: #0d9488;
+            --color-texto: #0f172a;
+            --color-texto-suave: #475569;
+            --fondo-pagina: #f8fafc;
+            --fondo-tarjeta: #ffffff;
+            --fondo-gris: #f1f5f9;
+            --fondo-footer: #090d16;
+            --sombra-subtil: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --sombra-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.2);
+            --radio-borde: 16px;
+            --fuente-titulo: 'Outfit', sans-serif;
+            --fuente-cuerpo: 'Plus Jakarta Sans', sans-serif;
+            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-contenedor {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--blanco-puro);
+            border: 3px solid var(--caqui-colegio);
+            box-shadow: 0 2px 8px rgba(207, 168, 114, 0.35);
+            flex-shrink: 0;
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-texto h1 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--azul-marino);
+            line-height: 1.15;
+        }
+
+        .logo-texto span {
+            font-size: 0.78rem;
+            color: var(--caqui-oscuro);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--fondo-pagina);
+            color: var(--color-texto);
+            font-family: var(--fuente-cuerpo);
+            line-height: 1.6;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .seccion {
+            padding: 80px 0;
+        }
+
+        .bg-gris {
+            background-color: var(--fondo-gris);
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .titulo-seccion {
+            font-family: var(--fuente-titulo);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-texto);
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        /* HEADER & MENÚ MÓVIL */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--color-primario);
+            line-height: 1;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: var(--color-acento);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--color-primario);
+            border-radius: 6px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--color-primario);
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--color-texto-suave);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transicion);
+        }
+
+        .nav a:hover {
+            color: var(--color-primario);
+            background-color: #f0f9ff;
+        }
+
+        .nav a.active {
+            color: #ffffff;
+            background-color: var(--color-primario);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        /* HERO BANNER */
+        .hero {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(2, 132, 199, 0.5) 100%),
+                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 75vh;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 24px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h2 {
+            font-family: var(--fuente-titulo);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            color: #f1f5f9;
+        }
+
+        .hero-botones {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-acento);
+            color: #ffffff;
+            padding: 15px 36px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 10px 20px rgba(234, 88, 12, 0.35);
+            transition: var(--transicion);
+        }
+
+        .btn:hover {
+            background-color: var(--color-acento-hover);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ESTADÍSTICAS Y WIDGET CLIMA */
+        .stats-bar {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 28px 0;
+            box-shadow: var(--sombra-subtil);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.8rem;
+            color: var(--color-primario);
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 0.875rem;
+            color: var(--color-texto-suave);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* INTRODUCCIÓN */
+        .texto-introduccion {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--fondo-tarjeta);
+            padding: 40px;
+            border-radius: var(--radio-borde);
+            box-shadow: var(--sombra-subtil);
+            border-left: 5px solid var(--color-acento);
+        }
+
+        .texto-introduccion h2 {
+            font-family: var(--fuente-titulo);
+            color: var(--color-texto);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        /* TARJETAS DE ATRACTIVOS */
+        .grid-tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .tarjeta {
+            background: var(--fondo-tarjeta);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            box-shadow: var(--sombra-subtil);
+            transition: var(--transicion);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+        }
+
+        .imagen-contenedor {
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .imagen-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .tarjeta:hover .imagen-contenedor img {
+            transform: scale(1.08);
+        }
+
+        .tarjeta-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .tarjeta-categoria {
+            color: var(--color-acento);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .tarjeta-info h3 {
+            font-family: var(--fuente-titulo);
+            color: var(--color-texto);
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+        .tarjeta-enlace {
+            margin-top: auto;
+            color: var(--color-primario);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* GASTRONOMÍA & CULTURA */
+        .contenido-dos-columnas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .columna {
+            background: var(--fondo-tarjeta);
+            padding: 35px;
+            border-radius: var(--radio-borde);
+            box-shadow: var(--sombra-subtil);
+            border-top: 4px solid var(--color-secundario);
+        }
+
+        .texto-recortado {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .texto-recortado.desplegado {
+            max-height: 600px;
+        }
+
+        .lista-gastronomia {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .btn-ver-mas {
+            background-color: var(--color-primario);
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            margin-top: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+        }
+
+        /* MAPA */
+        .mapa-contenedor {
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            box-shadow: var(--sombra-subtil);
+        }
+
+        .mapa-contenedor iframe {
+            width: 100%;
+            height: 380px;
+            border: 0;
+            display: block;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: var(--fondo-footer);
+            color: #94a3b8;
+            padding-top: 60px;
+        }
+
+        .footer-contenido {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--fuente-titulo);
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 24px;
+            background-color: #020617;
+            font-size: 0.875rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* BOTÓN FLOTANTE WHATSAPP */
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            text-decoration: none;
+            transition: var(--transicion);
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav.abierto {
+                max-height: 350px;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                padding-top: 15px;
+                gap: 8px;
+            }
+
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-box">
+                <img src="img/logo de choluteca.png" alt="Escudo del Instituto José Cecilio del Valle">
+            </div>
+            <div class="logo-texto">
+                <h1>Choluteca</h1>
+                <span>Sultana del Sur</span>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir navegación">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav" id="navPrincipal">
+            <ul>
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="historia.html">Historia</a></li>
+                <li><a href="que-visitar.html">Qué Visitar</a></li>
+                <li><a href="gastronomia.html">Gastronomía</a></li>
+                <li><a href="hoteles.html">Hoteles</a></li>
+                <li><a href="balnearios.html">Balnearios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Descubre la Sultana del Sur</h2>
+            <p>Historia colonial, cultura viva y atardeceres inolvidables en el sur de Honduras.</p>
+            <div class="hero-botones">
+                <a href="que-visitar.html" class="btn">Explorar Destinos</a>
+                <a href="#mapa" class="btn btn-outline">Ver Ubicación</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="stats-bar">
+        <div class="contenedor stats-grid">
+            <div class="stat-item">
+                <h4>☀️ 34°C</h4>
+                <p>Clima Cálido Promedio</p>
+            </div>
+            <div class="stat-item">
+                <h4>📍 154 km</h4>
+                <p>Desde Tegucigalpa</p>
+            </div>
+            <div class="stat-item">
+                <h4>🏛️ 1535</h4>
+                <p>Año de Fundación</p>
+            </div>
+            <div class="stat-item">
+                <h4>🌊 Golfo</h4>
+                <p>Acceso al Pacífico</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTRODUCCIÓN -->
+    <section id="historia" class="seccion contenedor">
+        <div class="texto-introduccion">
+            <h2>Ciudad Colonial y Cuna de la Historia</h2>
+            <p>Choluteca te da la bienvenida con sus calles impregnadas de tradición colonial, casonas históricas de
+                teja y su legado como cuna de ilustres próceres. Un rincón del sur hondureño donde el calor de su gente
+                rivaliza con el brillo de sus paisajes.</p>
+        </div>
+    </section>
+
+    <!-- ATRACTIVOS -->
+    <section id="atractivos" class="seccion contenedor bg-gris">
+        <h2 class="titulo-seccion">Atractivos Principales</h2>
+
+        <div class="grid-tarjetas">
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/catedral de choluteca.png" alt="Centro Histórico y Catedral" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <span class="tarjeta-categoria">Cultura & Arquitectura</span>
+                    <h3>Centro Histórico y Catedral</h3>
+                    <p>Admira la imponente Catedral Inmaculada Concepción y pasea por el centro colonial conservado a
+                        través del tiempo.</p>
+                    <a href="catedral.html" class="tarjeta-enlace">Ver detalles y ubicación &rarr;</a>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/puente de choluteca.png" alt="Puente de Choluteca" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <span class="tarjeta-categoria">Patrimonio e Ingeniería</span>
+                    <h3>Puente de Choluteca</h3>
+                    <p>Icono de ingeniería vial y símbolo irrompible de identidad que cruza sobre el caudaloso Río
+                        Choluteca.</p>
+                    <a href="que-visitar.html#puente" class="tarjeta-enlace">Ver detalles y ubicación &rarr;</a>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/golfo de fonceca.png" alt="Naturaleza y Golfo de Fonseca" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <span class="tarjeta-categoria">Naturaleza & Playas</span>
+                    <h3>Naturaleza y Golfo de Fonseca</h3>
+                    <p>Explora playas de arena volcánica como Cedeño y Punta Ratón, ideales para disfrutar
+                        espectaculares atardeceres.</p>
+                    <a href="playas.html" class="tarjeta-enlace">Ver detalles y ubicación &rarr;</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- GASTRONOMÍA Y TRADICIONES -->
+    <section id="gastronomia" class="seccion contenedor">
+        <h2 class="titulo-seccion">Sabores y Tradiciones</h2>
+        <div class="contenido-dos-columnas">
+            <div class="columna">
+                <h3>Gastronomía Sureña</h3>
+                <p>Déjate cautivar por el sabor auténtico de las famosas rosquillas cholutecanas, la tradicional sopa de
+                    gallina india, el crujiente pan de horno y frescos mariscos del Golfo.</p>
+                <div class="texto-recortado">
+                    <ul class="lista-gastronomia">
+                        <li><strong>La baleada:</strong> Tortilla de trigo doblada con frijoles fritos, mantequilla y
+                            queso.</li>
+                        <li><strong>Tapado olanchano:</strong> Guiso de carnes, verduras y plátano.</li>
+                        <li><strong>Sopa de caracol:</strong> Plato fuerte costeño con leche de coco y yuca.</li>
+                    </ul>
+                </div>
+                <button class="btn-ver-mas" onclick="toggleTexto(this)">Ver más</button>
+            </div>
+
+            <div class="columna">
+                <h3>Ferias y Cultura</h3>
+                <p>Vive la alegría de la Gran Feria Patronal de Diciembre, el tradicional Festival de la Sandía y las
+                    expresiones folclóricas que llenan de orgullo a la Sultana del Sur.</p>
+                <div class="texto-recortado">
+                    <ul class="lista-gastronomia">
+                        <li><strong>Fogones ancestrales:</strong> Preparación en fogones de leña usando metates de
+                            piedra.</li>
+                        <li><strong>Bebidas tradicionales:</strong> Atol de elote y pozol refrescante.</li>
+                    </ul>
+                </div>
+                <button class="btn-ver-mas" onclick="toggleTexto(this)">Ver más</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPA -->
+    <section id="mapa" class="seccion contenedor bg-gris">
+        <h2 class="titulo-seccion">Ubicación y Cómo Llegar</h2>
+        <div class="mapa-contenedor">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62057.25141042784!2d-87.21406859585672!3d13.303254593452243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f70f443914a84d9%3A0xc3f1dcbe1c905f03!2sCholuteca!5e0!3m2!1ses!2shn!4v1700000000000!5m2!1ses!2shn"
+                allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- BOTÓN WHATSAPP -->
+    <a href="https://web.whatsapp.com/" class="btn-whatsapp" target="_blank" aria-label="Contacto WhatsApp">💬</a>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="footer">
+        <div class="contenedor footer-contenido">
+            <div class="footer-col">
+                <h4>Choluteca Turística</h4>
+                <p>Promoviendo la riqueza cultural, histórica y natural del sur de Honduras.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="historia.html">Historia</a></li>
+                    <li><a href="que-visitar.html">Qué Visitar</a></li>
+                    <li><a href="gastronomia.html">Gastronomía</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>Email: info@turismocholuteca.hn</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Turismo Choluteca - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navPrincipal = document.getElementById('navPrincipal');
+
+        navToggle.addEventListener('click', () => {
+            navPrincipal.classList.toggle('abierto');
+        });
+
+        function toggleTexto(boton) {
+            const contenedor = boton.previousElementSibling;
+            contenedor.classList.toggle('desplegado');
+            boton.textContent = contenedor.classList.contains('desplegado') ? 'Ver menos' : 'Ver más';
+        }
+    </script>
+</body>
+
+</html>

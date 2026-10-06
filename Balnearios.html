@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balnearios y Recreación - Choluteca Turística</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-dark: #0f172a;
+            --accent-gold: #f59e0b;
+            --accent-amber: #d97706;
+            --brand-blue: #0284c7;
+            --brand-cyan: #06b6d4;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(6, 182, 212, 0.2);
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- ENCABEZADO RESPONSIVO --- */
+        .encabezado {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 6%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: var(--font-title);
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-gold) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--accent-gold);
+            border-radius: 6px;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            padding: 7px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        .navegacion {
+            display: flex;
+            align-items: center;
+        }
+
+        .navegacion ul {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+        }
+
+        .navegacion a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .navegacion a:hover,
+        .navegacion a.activo {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- HERO HEADER --- */
+        .hero-catalogo {
+            position: relative;
+            height: 45vh;
+            min-height: 320px;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 20px;
+        }
+
+        .hero-catalogo-contenido {
+            max-width: 800px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-catalogo-contenido h2 {
+            font-family: var(--font-title);
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .hero-catalogo-contenido p {
+            font-size: 1.2rem;
+            color: #e2e8f0;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL Y FILTROS --- */
+        .contenedor-principal {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+            width: 100%;
+        }
+
+        .barra-filtros {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 18px 25px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .titulo-seccion {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            font-weight: 800;
+        }
+
+        .botones-filtro {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-filtro {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-filtro:hover,
+        .btn-filtro.activo {
+            background: var(--primary-dark);
+            color: #ffffff;
+            border-color: var(--primary-dark);
+        }
+
+        /* --- GRID DE 9 TARJETAS ESTILO AIRBNB/BOOKING --- */
+        .grid-balnearios {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .tarjeta-balneario {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tarjeta-balneario:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(6, 182, 212, 0.4);
+        }
+
+        .imagen-tarjeta {
+            position: relative;
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .imagen-tarjeta img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .tarjeta-balneario:hover .imagen-tarjeta img {
+            transform: scale(1.08);
+        }
+
+        .tag-ubicacion {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(15, 23, 42, 0.82);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 15px;
+            backdrop-filter: blur(4px);
+        }
+
+        .tag-tipo {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 15px;
+        }
+
+        .contenido-tarjeta {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .encabezado-tarjeta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .encabezado-tarjeta h3 {
+            font-family: var(--font-title);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .rating {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-amber);
+            white-space: nowrap;
+        }
+
+        .descripcion-tarjeta {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .servicios-iconos {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--bg-light);
+            padding-top: 15px;
+        }
+
+        .servicio-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg-light);
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        .acciones-tarjeta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-whatsapp-sm {
+            flex: 1;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: var(--transition);
+        }
+
+        .btn-whatsapp-sm:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-info-sm {
+            background: var(--bg-light);
+            color: var(--primary-dark);
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .btn-info-sm:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        /* --- VISOR LIGHTBOX --- */
+        .modal-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .pie-pagina {
+            background: var(--primary-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            font-size: 0.95rem;
+            margin-top: auto;
+            border-top: 1px solid #1e293b;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .navegacion {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .navegacion.abierto {
+                max-height: 250px;
+            }
+
+            .navegacion ul {
+                flex-direction: column;
+                padding-top: 15px;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .hero-catalogo-contenido h2 {
+                font-size: 2.2rem;
+            }
+
+            .grid-balnearios {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO CON MENÚ MÓVIL -->
+    <header class="encabezado">
+        <div class="logo">
+            <div class="logo-box">
+                <img src="img/logo de choluteca.png" alt="Escudo del Instituto José Cecilio del Valle">
+            </div>
+            <div class="logo-texto">
+                <h1>Choluteca</h1>
+                <span>Sultana del Sur</span>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navegacion" id="navMenu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="que-visitar.html">Qué Visitar</a></li>
+                <li><a href="gastronomia.html">Gastronomía</a></li>
+                <li><a href="hoteles.html">Hoteles</a></li>
+                <li><a href="balnearios.html" class="activo">Balnearios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO DE LA SECCIÓN -->
+    <section class="hero-catalogo">
+        <div class="hero-catalogo-contenido">
+            <h2>Balnearios y Recreativos de la Zona Sur</h2>
+            <p>Descubre los mejores centros acuáticos, turicentros y ríos para disfrutar del clima tropical de Choluteca
+                y Valle.</p>
+        </div>
+    </section>
+
+    <!-- CONTENEDOR Y FILTROS -->
+    <main class="contenedor-principal">
+
+        <div class="barra-filtros">
+            <span class="titulo-seccion">9 Destinos Recomendados</span>
+            <div class="botones-filtro">
+                <button class="btn-filtro activo" onclick="filtrar('todos')">Todos</button>
+                <button class="btn-filtro" onclick="filtrar('parque-acuatico')">Parques Acuáticos</button>
+                <button class="btn-filtro" onclick="filtrar('turicentro')">Turicentros</button>
+            </div>
+        </div>
+
+        <!-- GRID DE 9 BALNEARIOS -->
+        <div class="grid-balnearios">
+
+            <!-- 1.  Centro Turístico Rancho Los Carretos -->
+            <article class="tarjeta-balneario" data-categoria="turicentro">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8PT6Lj13vO_cn46sOmrQuf-9krV5zoV0TyhMXdCNINg&s=10" alt="Centro Turístico Rancho Los Carretos"
+                        onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 Choluteca</span>
+                    <span class="tag-tipo">Turicentro</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Centro Turístico Rancho Los Carretos</h3>
+                        <span class="rating">★ 4.9</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Este amplio balneario y espacio campestre campestre está ubicado en
+                        Marcovia. Es una de las opciones más populares de la zona y destaca por ser un lugar ideal para
+                        el entretenimiento familiar</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🏊‍♂️ Piscinas</span>
+                        <span class="servicio-item">🍔 Restaurante</span>
+                        <span class="servicio-item">🅿️ Parking</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20Rancho%20Los%20Carretos"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2. Turicentro Eco-Balneario El Manantial -->
+            <article class="tarjeta-balneario" data-categoria="parque-acuatico">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPKTQPsnFFzNfdH15WeGV0FJILe6YSwuCgTp7jmk3xhQ&s=10" alt="Turicentro Eco-Balneario El Manantial" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍Palo Herrado, Choluteca </span>
+                    <span class="tag-tipo">Parque Acuático</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Turicentro Eco-Balneario El Manantial</h3>
+                        <span class="rating">★ 4.9</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Turicentro eco-balneario con instalaciones modernas y un entorno natural que ofrece una experiencia de recreación única.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🛝 Toboganes</span>
+                        <span class="servicio-item">⚽ Campo de fútbol</span>
+                        <span class="servicio-item">🌳 Áreas verdes</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20El%20Manantial"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3. Centro Turístico Gold Fruit-->
+            <article class="tarjeta-balneario" data-categoria="rio-natural">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmapNkKmmXovRaHaFKPtCSKDJkZH1i9JA-0OCfS3xxhg&s=10" alt="Centro Turístico Gold Fruit" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 Santa Ana de Yusguare</span>
+                    <span class="tag-tipo">Centro Turístico</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Centro Turístico Gold Fruit</h3>
+                        <span class="rating">★ 4.6</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Tradicional balneario natural con pozas frescas de agua corriente de
+                        río. Rodeado de naturaleza y champas donde degustar sopa de gallina india.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🎵 Música</span>
+                        <span class="servicio-item">🍲 Comida Local</span>
+                        <span class="servicio-item">🍃 Sombra</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20Gold%20Fruit"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 4. Club Turístico Cooperativo -->
+            <article class="tarjeta-balneario" data-categoria="turicentro">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzxqYVpn30l9EJvtlwooQ4BFdGo9pd7xlVkeMNhu2FLg&s=10" alt="Club Turístico Cooperativo" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 Choluteca</span>
+                    <span class="tag-tipo">Turicentro</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Club Turístico Cooperativo</h3>
+                        <span class="rating">★ 4.7</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Ubicado en la zona fresca de San Marcos de Colón. Combina piscinas
+                        alimentadas por nacimientos de agua natural con clima agradable de montaña.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🌲 Clima Fresco</span>
+                        <span class="servicio-item">🏊‍♂️ Piscinas</span>
+                        <span class="servicio-item">🏕️ Cabañas</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20Club%20Turístico%20Cooperativo"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 5. Aqua Park Cedeño -->
+            <article class="tarjeta-balneario" data-categoria="rio-natural">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnwABAyHFh4efb3zeXjR5GZK2dDh9h3Ndi37U1Rdtg7A&s=10" alt="Aqua Park Cedeño" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 Cedeño,colonia Callejas</span>
+                    <span class="tag-tipo">Río Natural</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Aqua Park Cedeño</h3>
+                        <span class="rating">★ 4.9</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Impresionantes cañones rocosos y pozas turquesas cristalinas.
+                        Perfecto para aventureros que buscan senderismo y clavados en aguas puras.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🏞️ Cañones</span>
+                        <span class="servicio-item">💧 Aguas Claras</span>
+                        <span class="servicio-item">📸 Fotos</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20Aqua%20Park%20Cedeño"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 6. Balneario El Chaguite -->
+            <article class="tarjeta-balneario" data-categoria="turicentro">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOndLL9aEQY6Mh5nD64c8qNz4AlQOGOr_kELwFBcnK8w&s=10" alt="Balneario El Chaguite" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 zona de El Trapiche Centro, Choluteca,</span>
+                    <span class="tag-tipo">Turicentro</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Turicentro La Fuente</h3>
+                        <span class="rating">★ 4.8</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Ubicado en San Lorenzo. Ofrece piscinas semi-olímpicas, jacuzzis,
+                        restaurante especializado en mariscos y áreas VIP para eventos sociales.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🦐 Mariscos</span>
+                        <span class="servicio-item">🏊‍♂️ Semi-olímpica</span>
+                        <span class="servicio-item">🍹 Bar</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20La%20Fuente"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 7. Centro Turístico La Esperanza -->
+            <article class="tarjeta-balneario" data-categoria="parque-acuatico">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStS1-gpW9rI9oo8BDTBS4aEk1y1uV8vMfmK1x3fWzAUIcO61YjLAJ8BDls&s=10" alt="Centro Turístico La Esperanza" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 Monjarás, Marcovia</span>
+                    <span class="tag-tipo">Parque Acuático</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Centro Turístico La Esperanza</h3>
+                        <span class="rating">★ 4.6</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Excelente combinación de toboganes infantiles, piscina familiar y
+                        cercanía a las zonas costeras de Marcovia. Ambiente 100% familiar.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">👨‍👩‍👧‍👦 Familiar</span>
+                        <span class="servicio-item">🛝 Toboganes</span>
+                        <span class="servicio-item">🦐 Mariscos</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20La%20Esperanza"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 8. Centro Turístico JICA-SUR -->
+            <article class="tarjeta-balneario" data-categoria="parque-acuatico">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-NYYf5UdW-z6UHlPvUjzvUz61lKm7NTwA1VV04AATfw&s=10" alt="Centro Turístico JICA-SUR" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 El Jicaral de Linaca, Choluteca</span>
+                    <span class="tag-tipo">Parque Acuático</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Cascadas Río Sacamil</h3>
+                        <span class="rating">★ 4.9</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Famoso por sus formaciones rocosas naturales que crean pequeñas
+                        cascadas y pozas ideales para refrescarse durante el recorrido por Pespire.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🌊 Cascadas </span>
+                        <span class="servicio-item">🥾 Senderismo</span>
+                        <span class="servicio-item">🆓 Acceso Libre</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20Rio%20Sacamil"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 9. Turicentro Valle del Sol -->
+            <article class="tarjeta-balneario" data-categoria="turicentro">
+                <div class="imagen-tarjeta">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgVMD4tPV2lrDHPPn7gMbBGt3CeybNOTsHkECTPhBlDQ&s=10" alt="Turicentro Valle del Sol" onclick="abrirLightbox(this.src)">
+                    <span class="tag-ubicacion">📍 Nacaome, Valle</span>
+                    <span class="tag-tipo">Turicentro</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <div class="encabezado-tarjeta">
+                        <h3>Turicentro Valle del Sol</h3>
+                        <span class="rating">★ 4.7</span>
+                    </div>
+                    <p class="descripcion-tarjeta">Complejo turístico con múltiples piscinas, juegos infantiles, chozas
+                        privadas de descanso y amplio menú de comida típica regional.</p>
+                    <div class="servicios-iconos">
+                        <span class="servicio-item">🏖️ Chozas</span>
+                        <span class="servicio-item">⚽ Canchas</span>
+                        <span class="servicio-item">🍔 Buffet</span>
+                    </div>
+                    <div class="acciones-tarjeta">
+                        <a href="https://wa.me/50427820000?text=Hola,%20deseo%20informacion%20sobre%20Valle%20del%20Sol"
+                            target="_blank" class="btn-whatsapp-sm">💬 WhatsApp</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- VISOR LIGHTBOX EMERGENTE -->
+    <div id="lightboxModal" class="modal-lightbox" onclick="cerrarLightbox()">
+        <span class="cerrar-modal">&times;</span>
+        <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Choluteca Turística. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT INTERACTIVO -->
+    <script>
+        // Control de Menú Móvil
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('abierto');
+        });
+
+        // Visor Lightbox
+        function abrirLightbox(src) {
+            document.getElementById('imagenAmpliada').src = src;
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function cerrarLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        // Filtro por Categoría
+        function filtrar(categoria) {
+            const tarjetas = document.querySelectorAll('.tarjeta-balneario');
+            const botones = document.querySelectorAll('.btn-filtro');
+
+            // Actualizar botón activo
+            botones.forEach(btn => btn.classList.remove('activo'));
+            event.target.classList.add('activo');
+
+            // Filtrar tarjetas
+            tarjetas.forEach(tarjeta => {
+                if (categoria === 'todos' || tarjeta.dataset.categoria === categoria) {
+                    tarjeta.style.display = 'flex';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

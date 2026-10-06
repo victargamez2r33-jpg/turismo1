@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Choluteca</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --color-primario: #0284c7;
+            --color-primario-oscuro: #0369a1;
+            --color-acento: #ea580c;
+            --color-acento-hover: #c2410c;
+            --color-texto: #0f172a;
+            --color-texto-suave: #475569;
+            --fondo-pagina: #f8fafc;
+            --fondo-tarjeta: #ffffff;
+            --fondo-footer: #090d16;
+            --sombra-subtil: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --sombra-focus: 0 0 0 4px rgba(2, 132, 199, 0.15);
+            --radio-borde: 16px;
+            --fuente-titulo: 'Outfit', sans-serif;
+            --fuente-cuerpo: 'Plus Jakarta Sans', sans-serif;
+            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--fondo-pagina);
+            color: var(--color-texto);
+            font-family: var(--fuente-cuerpo);
+            line-height: 1.6;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .seccion { padding: 70px 0 90px 0; }
+
+        .titulo-seccion {
+            font-family: var(--fuente-titulo);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-texto);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--color-primario);
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: var(--color-acento);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--color-primario);
+            border-radius: 6px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--color-primario);
+            margin: 5px 0;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--color-texto-suave);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transicion);
+        }
+
+        .nav a:hover {
+            color: var(--color-primario);
+            background-color: #f0f9ff;
+        }
+
+        .nav a.active {
+            color: #ffffff;
+            background-color: var(--color-primario);
+        }
+
+        .contenido-dos-columnas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+        }
+
+        .columna {
+            background: var(--fondo-tarjeta);
+            padding: 40px;
+            border-radius: var(--radio-borde);
+            box-shadow: var(--sombra-subtil);
+            border: 1px solid #f1f5f9;
+        }
+
+        .columna h3 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.6rem;
+            color: var(--color-texto);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .formulario-contacto {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .grupo-campo {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .grupo-campo label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .grupo-campo input, .grupo-campo textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-family: var(--fuente-cuerpo);
+            font-size: 0.95rem;
+        }
+
+        .grupo-campo input:focus, .grupo-campo textarea:focus {
+            outline: none;
+            border-color: var(--color-primario);
+            box-shadow: var(--sombra-focus);
+        }
+
+        .btn {
+            background-color: var(--color-acento);
+            color: #ffffff;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 30px;
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transicion);
+            align-self: flex-start;
+        }
+
+        .btn:hover { background-color: var(--color-acento-hover); }
+
+        .info-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .info-item strong {
+            color: var(--color-primario);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .mapa-contacto {
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .footer {
+            background-color: var(--fondo-footer);
+            color: #94a3b8;
+            padding-top: 60px;
+        }
+
+        .footer-contenido {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--fuente-titulo);
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: #94a3b8; text-decoration: none; }
+
+        .copyright {
+            text-align: center;
+            padding: 24px;
+            background-color: #020617;
+            font-size: 0.875rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .nav.abierto { max-height: 350px; }
+            .nav ul {
+                flex-direction: column;
+                padding-top: 15px;
+                gap: 8px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-box">
+                <img src="img/logo de choluteca.png" alt="Escudo del Instituto José Cecilio del Valle">
+            </div>
+            <div class="logo-texto">
+                <h1>Choluteca</h1>
+                <span>Sultana del Sur</span>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir navegación">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav" id="navPrincipal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="historia.html">Historia</a></li>
+                <li><a href="que-visitar.html">Qué Visitar</a></li>
+                <li><a href="gastronomia.html">Gastronomía</a></li>
+                <li><a href="hoteles.html">Hoteles</a></li>
+                <li><a href="balnearios.html">Balnearios</a></li>
+                <li><a href="contacto.html" class="active">Contacto</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <section class="seccion contenedor">
+        <h2 class="titulo-seccion">Ponte en Contacto con Nosotros</h2>
+
+        <div class="contenido-dos-columnas">
+            <!-- FORMULARIO -->
+            <div class="columna">
+                <h3>Envíanos un mensaje</h3>
+                <form action="#" method="POST" class="formulario-contacto">
+                    <div class="grupo-campo">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+                    </div>
+                    <div class="grupo-campo">
+                        <label for="mensaje">Mensaje:</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="¿En qué te podemos ayudar?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Consulta</button>
+                </form>
+            </div>
+
+            <!-- INFORMACIÓN Y MAPA -->
+            <div class="columna">
+                <h3>Información Turística</h3>
+
+                <div class="info-item">
+                    <strong>Ubicación</strong>
+                    <p>Centro Histórico, frente al Parque Valle, Choluteca, Honduras.</p>
+                </div>
+
+                <div class="info-item">
+                    <strong>Teléfono Directo / WhatsApp</strong>
+                    <p>+504 2782-0000</p>
+                </div>
+
+                <div class="info-item">
+                    <strong>Correo Electrónico</strong>
+                    <p>info@turismocholuteca.hn</p>
+                </div>
+
+                <div class="mapa-contacto">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3879.170420780287!2d-87.1856754!3d13.3032546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f70f443914a84d9%3A0xc3f1dcbe1c905f03!2sCholuteca!5e0!3m2!1ses!2shn!4v1700000000000!5m2!1ses!2shn" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="contenedor footer-contenido">
+            <div class="footer-col">
+                <h4>Choluteca Turística</h4>
+                <p>Estamos listos para orientarte en tu visita.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="historia.html">Historia</a></li>
+                    <li><a href="que-visitar.html">Qué Visitar</a></li>
+                    <li><a href="gastronomia.html">Gastronomía</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="hoteles.html">Hoteles</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>Email: info@turismocholuteca.hn</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Turismo Choluteca - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navPrincipal = document.getElementById('navPrincipal');
+
+        navToggle.addEventListener('click', () => {
+            navPrincipal.classList.toggle('abierto');
+        });
+    </script>
+</body>
+
+</html>

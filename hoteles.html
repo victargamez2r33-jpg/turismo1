@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoteles & Hospedaje - Choluteca, Sultana del Sur</title>
+    <!-- Fuentes modernas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primario: #0284c7;
+            --color-primario-oscuro: #0369a1;
+            --color-acento: #ea580c;
+            --color-acento-hover: #c2410c;
+            --color-exito: #16a34a;
+            --color-texto: #0f172a;
+            --color-texto-suave: #475569;
+            --fondo-pagina: #f8fafc;
+            --fondo-tarjeta: #ffffff;
+            --fondo-footer: #090d16;
+            --sombra-subtil: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+            --sombra-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.2);
+            --radio-borde: 16px;
+            --fuente-titulo: 'Outfit', sans-serif;
+            --fuente-cuerpo: 'Plus Jakarta Sans', sans-serif;
+            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--fondo-pagina);
+            color: var(--color-texto);
+            font-family: var(--fuente-cuerpo);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVEGACIÓN */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .logo h1 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-primario);
+            line-height: 1;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: var(--color-acento);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--color-texto-suave);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transicion);
+        }
+
+        .nav a:hover {
+            color: var(--color-primario);
+            background-color: #f0f9ff;
+        }
+
+        .nav a.active {
+            color: #ffffff;
+            background-color: var(--color-primario);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        /* HERO BUSCADOR TURÍSTICO */
+        .hero-hoteles {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(2, 132, 199, 0.6) 100%),
+                        url('img/hotelgualiqueme.png') center/cover no-repeat;
+            padding: 60px 24px 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-hoteles h2 {
+            font-family: var(--fuente-titulo);
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero-hoteles p {
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        /* BARRA DE BÚSQUEDA INTERACTIVA */
+        .search-bar {
+            background: white;
+            max-width: 950px;
+            margin: 0 auto;
+            border-radius: 50px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            flex-wrap: wrap;
+        }
+
+        .search-item {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding: 5px 15px;
+            flex: 1;
+            min-width: 160px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .search-item:last-of-type { border-right: none; }
+
+        .search-item label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-texto-suave);
+            text-transform: uppercase;
+        }
+
+        .search-item input, .search-item select {
+            border: none;
+            outline: none;
+            font-family: var(--fuente-cuerpo);
+            font-weight: 600;
+            color: var(--color-texto);
+            background: transparent;
+            font-size: 0.95rem;
+        }
+
+        .btn-buscar {
+            background: var(--color-acento);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transicion);
+        }
+
+        .btn-buscar:hover {
+            background: var(--color-acento-hover);
+            transform: translateY(-2px);
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1240px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* CARD DE MAPA Y UBICACIÓN */
+        .map-banner {
+            background: white;
+            border-radius: var(--radio-borde);
+            padding: 24px 32px;
+            box-shadow: var(--sombra-subtil);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .map-banner-info h3 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.5rem;
+            color: var(--color-primario);
+        }
+
+        .map-banner-info p {
+            color: var(--color-texto-suave);
+            font-size: 0.95rem;
+        }
+
+        .btn-mapa {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--fuente-titulo);
+            transition: var(--transicion);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-mapa:hover {
+            background-color: var(--color-primario-oscuro);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(2, 132, 199, 0.3);
+        }
+
+        /* FILTROS RÁPIDOS DE CATEGORÍA */
+        .filtros-categoria {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .btn-filtro {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-texto-suave);
+            cursor: pointer;
+            transition: var(--transicion);
+            white-space: nowrap;
+        }
+
+        .btn-filtro:hover, .btn-filtro.activo {
+            background: var(--color-primario);
+            color: white;
+            border-color: var(--color-primario);
+        }
+
+        /* GRID DE TARJETAS DE HOTELES */
+        .grid-hoteles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .hotel-card {
+            background: var(--fondo-tarjeta);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            box-shadow: var(--sombra-subtil);
+            border: 1px solid #f1f5f9;
+            transition: var(--transicion);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+            border-color: #bae6fd;
+        }
+
+        .badge-destacado {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .hotel-img-wrapper {
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hotel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hotel-card:hover .hotel-img {
+            transform: scale(1.08);
+        }
+
+        .hotel-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .hotel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .hotel-card h3 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.35rem;
+            color: var(--color-texto);
+            font-weight: 700;
+        }
+
+        .rating-box {
+            background: #fef3c7;
+            color: #d97706;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .hotel-card p {
+            color: var(--color-texto-suave);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        /* AMENIDADES / SERVICIOS */
+        .amenities {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            font-size: 0.82rem;
+            color: var(--color-texto-suave);
+            flex-wrap: wrap;
+        }
+
+        .amenity-tag {
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .direccion {
+            font-size: 0.85rem;
+            color: var(--color-texto-suave);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .hotel-footer {
+            margin-top: auto;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cancelacion {
+            color: var(--color-exito);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .btn-ver-detalle {
+            background: transparent;
+            color: var(--color-primario);
+            border: 2px solid var(--color-primario);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: var(--transicion);
+        }
+
+        .btn-ver-detalle:hover {
+            background: var(--color-primario);
+            color: white;
+        }
+
+        /* MODAL INTERACTIVO DE DETALLES */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radio-borde);
+            max-width: 650px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--color-texto-suave);
+        }
+
+        .modal-content h3 {
+            font-family: var(--fuente-titulo);
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            margin: 15px 0 25px;
+            color: var(--color-texto-suave);
+        }
+
+        .btn-reserva-confirmar {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background: var(--color-acento);
+            color: white;
+            padding: 14px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: var(--fuente-titulo);
+            font-weight: 700;
+            transition: var(--transicion);
+        }
+
+        .btn-reserva-confirmar:hover {
+            background: var(--color-acento-hover);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--fondo-footer);
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .search-bar {
+                flex-direction: column;
+                border-radius: var(--radio-borde);
+            }
+            .search-item {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+                width: 100%;
+            }
+            .btn-buscar {
+                width: 100%;
+            }
+            .map-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+
+    <!-- 1. ENCABEZADO Y NAVEGACIÓN -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-box">
+                <img src="img/logo de choluteca.png" alt="Escudo del Instituto José Cecilio del Valle">
+            </div>
+            <div class="logo-texto">
+                <h1>Choluteca</h1>
+                <span>Sultana del Sur</span>
+            </div>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="historia.html">Historia</a></li>
+                <li><a href="que-visitar.html">Qué Visitar</a></li>
+                <li><a href="gastronomia.html">Gastronomía</a></li>
+                <li><a href="hoteles.html" class="active" aria-current="page">Hoteles</a></li>
+                <li><a href="balnearios.html">Balnearios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 2. HERO & PANEL DE BÚSQUEDA INTERACTIVO -->
+    <section class="hero-hoteles">
+        <h2>Encuentra tu Hospedaje Ideal</h2>
+        <p>Reserva en los hoteles más cómodos y recomendados de Choluteca con confirmación inmediata.</p>
+        
+        <!-- Buscador Estilo Portales de Viaje -->
+        <form class="search-bar" onsubmit="event.preventDefault(); filtrarPorFormulario();">
+            <div class="search-item">
+                <label>Llegada</label>
+                <input type="date" value="2026-09-15">
+            </div>
+            <div class="search-item">
+                <label>Salida</label>
+                <input type="date" value="2026-09-17">
+            </div>
+            <div class="search-item">
+                <label>Huéspedes</label>
+                <select>
+                    <option>1 Huésped</option>
+                    <option selected>2 Huéspedes</option>
+                    <option>3+ Huéspedes</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-buscar">🔍 Buscar Hoteles</button>
+        </form>
+    </section>
+
+    <!-- 3. CONTENEDOR PRINCIPAL -->
+    <div class="container">
+
+        <!-- Banner de Ubicación y Mapa Interactivo -->
+        <div class="map-banner">
+            <div class="map-banner-info">
+                <h3>🗺️ Explorar Hoteles en el Mapa Interactivo</h3>
+                <p>Visualiza tarifas en tiempo real, referencias de coordenadas y disponibilidad exacta en Google Travel.</p>
+            </div>
+            <a href="https://www.google.com/travel/search?q=cuales%20son%20los%20mejores%20hoteles%20de%20choluteca&g2lb=4965990%2C72471280%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C73064764%2C121529350%2C121608706%2C121738283%2C121762713%2C121921501%2C121951222%2C121954673%2C122005377&hl=en-HN&gl=hn&cs=1&ssta=1&ts=CAESCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAJGB0SBwjqDxAJGB4YATICEAAqCQoFOgNITkwoCA&qs=CAE4BlpyMnCqAW0QASoXIhNsb3MgbWVqb3JlcyBob3RlbGVzKA4yHxABIhtK-8AoU-uQeugR4b0hdevzQIF0CnG-slou_nYyLxACIitjdWFsZXMgc29uIGxvcyBtZWpvcmVzIGhvdGVsZXMgZGUgY2hvbHV0ZXNh&ap=KigKEgky-F1VYIsqQBHLdzSNU85VwBISCcAx-QZzuCpAEct3NL0KyVXASAE&ictx=111&ved=0CAAQ5JsGahcKEwjo_vW2oueWAxUAAAAAHQAAAAAQBQ" 
+               target="_blank" class="btn-mapa">
+               📍 Ver Mapa en Google Travel
+            </a>
+        </div>
+
+        <!-- Filtros Rápidos -->
+        <div class="filtros-categoria">
+            <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos los Hoteles</button>
+            <button class="btn-filtro" onclick="filtrar('top', this)">⭐ Rating 4.3+</button>
+            <button class="btn-filtro" onclick="filtrar('piscina', this)">🏊 Con Piscina</button>
+            <button class="btn-filtro" onclick="filtrar('centro', this)">📍 Céntricos</button>
+        </div>
+
+        <!-- Grid de los 8 Hoteles -->
+        <section class="grid-hoteles">
+            
+            <!-- Hotel 1 -->
+            <article class="hotel-card" data-rating="4.4" data-piscina="true" data-centro="false">
+                <span class="badge-destacado">🏆 Recomendado</span>
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotelgualiqueme.png" alt="Hotel Hacienda Gualiqueme" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>Hotel Hacienda Gualiqueme</h3>
+                        <div class="rating-box">★ 4.4</div>
+                    </div>
+                    <p>Complejo colonial exclusivo con extensas áreas verdes, piscina al aire libre y restaurante de alta cocina.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">🏊 Piscina</span>
+                        <span class="amenity-tag">📶 Wi-Fi 5G</span>
+                        <span class="amenity-tag">🍳 Desayuno</span>
+                        <span class="amenity-tag">🅿️ Parking</span>
+                    </div>
+                    <div class="direccion">📍 Carretera Panamericana CA-1, Choluteca</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Cancelación Gratuita</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('Hotel Hacienda Gualiqueme', 'Complejo de estilo colonial con amplias áreas verdes, piscina de agua de manantial, salas de conferencias y servicio de restaurante.', 'Carretera Panamericana CA-1, Choluteca', '4.4 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 2 -->
+            <article class="hotel-card" data-rating="4.2" data-piscina="true" data-centro="true">
+                <span class="badge-destacado">💼 Eventos & Negocios</span>
+                <div class="hotel-img-wrapper">
+                    <img src="img/hoteljicaral.png" alt="Jicaral Hotel" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>Jicaral Hotel & Convenciones</h3>
+                        <div class="rating-box">★ 4.2</div>
+                    </div>
+                    <p>Habitaciones ejecutivas confortables, piscina, restaurante internacional y salones para conferencias.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">🏊 Piscina</span>
+                        <span class="amenity-tag">💼 Centro Negocios</span>
+                        <span class="amenity-tag">❄️ A/C</span>
+                    </div>
+                    <div class="direccion">📍 Salida a Guasaule, Bo. Las Brisas</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Reserva Flex</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('Jicaral Hotel & Convenciones', 'El hotel de negocios por excelencia en Choluteca. Cuenta con salones acondicionados para eventos masivos, piscina y suites de lujo.', 'Salida a Guasaule, Bo. Las Brisas, Choluteca', '4.2 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 3 -->
+            <article class="hotel-card" data-rating="4.5" data-piscina="false" data-centro="true">
+                <span class="badge-destacado">⭐ Top Valorados</span>
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotelmmm.png" alt="HM Hotel" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>HM Hotel</h3>
+                        <div class="rating-box">★ 4.5</div>
+                    </div>
+                    <p>Atención personalizada, diseño moderno e instalaciones impecables en una zona segura de la ciudad.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">📶 Wi-Fi Alta Velocidad</span>
+                        <span class="amenity-tag">📺 TV Cable</span>
+                        <span class="amenity-tag">🔒 Seguridad 24/7</span>
+                    </div>
+                    <div class="direccion">📍 Barrio Tamarindo, Choluteca</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Pago en Recepción</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('HM Hotel', 'Instalaciones modernas que combinan confort urbano con una atención personalizada excepcional. Ideal para estancias de corta y larga duración.', 'Barrio Tamarindo, Choluteca', '4.5 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 4 -->
+            <article class="hotel-card" data-rating="4.3" data-piscina="false" data-centro="true">
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotelcoloniavilla.png" alt="Hotel Villa Colonial" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>Hotel Villa Colonial</h3>
+                        <div class="rating-box">★ 4.3</div>
+                    </div>
+                    <p>Ambiente familiar y acogedor con arquitectura clásica, ideal para viajes de descanso o trabajo.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">☕ Desayuno Incluido</span>
+                        <span class="amenity-tag">❄️ A/C</span>
+                        <span class="amenity-tag">🅿️ Parqueo</span>
+                    </div>
+                    <div class="direccion">📍 Barrio El Tamarindo, Choluteca</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Cancelación Gratuita</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('Hotel Villa Colonial', 'Tranquilidad y ambiente hogareño con toque colonial en pleno corazón urbano de Choluteca.', 'Barrio El Tamarindo, Choluteca', '4.3 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 5 -->
+            <article class="hotel-card" data-rating="4.1" data-piscina="false" data-centro="true">
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotelvictoria.png" alt="Gran Hotel Victoria" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>Gran Hotel Victoria</h3>
+                        <div class="rating-box">★ 4.1</div>
+                    </div>
+                    <p>Recepción disponible 24/7, habitaciones climatizadas y rápido acceso al comercio céntrico.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">🛎️ Recepción 24h</span>
+                        <span class="amenity-tag">📶 Wi-Fi</span>
+                        <span class="amenity-tag">❄️ Climatizado</span>
+                    </div>
+                    <div class="direccion">📍 Zona Central, Choluteca</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Reserva Inmediata</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('Gran Hotel Victoria', 'Hotel estratégico situado convenientemente cerca de la zona comercial central y bancaria.', 'Zona Central, Choluteca', '4.1 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 6 -->
+            <article class="hotel-card" data-rating="4.1" data-piscina="false" data-centro="false">
+                <span class="badge-destacado">💎 Estilo Boutique</span>
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotel  casa luna.png" alt="Hotel Boutique Casa D' Luna" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>Hotel Boutique Casa D' Luna</h3>
+                        <div class="rating-box">★ 4.1</div>
+                    </div>
+                    <p>Concepto exclusivo de alojamiento boutique que garantiza total privacidad e higiene superior.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">🔒 Máxima Privacidad</span>
+                        <span class="amenity-tag">🧼 Desinfectado</span>
+                        <span class="amenity-tag">🍸 Bar Privado</span>
+                    </div>
+                    <div class="direccion">📍 Barrio El Hospital, Choluteca</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Cancelación Flexible</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('Hotel Boutique Casa D\' Luna', 'Alojamiento boutique de diseño único enfocado en la tranquilidad, privacidad y un descanso placentero.', 'Barrio El Hospital, Choluteca', '4.1 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 7 -->
+            <article class="hotel-card" data-rating="4.7" data-piscina="false" data-centro="false">
+                <span class="badge-destacado">👑 Mejor Puntuado</span>
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotelrc m.png" alt="RC LUX Hotel" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>RC LUX Hotel</h3>
+                        <div class="rating-box">★ 4.7</div>
+                    </div>
+                    <p>Espacios modernos de lujo, habitaciones insonorizadas, camas premium y parqueo privado vigildo.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">🛏️ Camas King</span>
+                        <span class="amenity-tag">🛡️ Parqueo Monitoreado</span>
+                        <span class="amenity-tag">📶 Fibra Óptica</span>
+                    </div>
+                    <div class="direccion">📍 Barrio La Ceiba, Choluteca</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Confirmación al Instante</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('RC LUX Hotel', 'Hotel de estándares superiores galardonado por huéspedes por su pulcritud, camas confortables y atención personalizada.', 'Barrio La Ceiba, Choluteca', '4.7 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hotel 8 -->
+            <article class="hotel-card" data-rating="3.9" data-piscina="false" data-centro="true">
+                <div class="hotel-img-wrapper">
+                    <img src="img/hotem madosss.png" alt="Mado´s Hotel Tamarindo" class="hotel-img">
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <h3>Mado´s Hotel Tamarindo</h3>
+                        <div class="rating-box">★ 3.9</div>
+                    </div>
+                    <p>Opción económica, práctica y segura para viajeros que buscan comodidad con tarifa accesible.</p>
+                    <div class="amenities">
+                        <span class="amenity-tag">💵 Tarifa Económica</span>
+                        <span class="amenity-tag">📍 Excelente Ubicación</span>
+                    </div>
+                    <div class="direccion">📍 Barrio Tamarindo, detrás de Wendy's</div>
+                    <div class="hotel-footer">
+                        <span class="cancelacion">✓ Cancelación Gratuita</span>
+                        <button class="btn-ver-detalle" onclick="abrirModal('Mado´s Hotel Tamarindo', 'Alojamiento económico y práctico estratégicamente ubicado cerca de zonas comerciales y transporte.', 'Barrio Tamarindo, detrás de Wendy\'s', '3.9 / 5.0')">Ver detalles</button>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+    </div>
+
+    <!-- MODAL POPUP PARA VER DETALLES DEL HOTEL -->
+    <div id="modalHotel" class="modal">
+        <div class="modal-content">
+            <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+            <h3 id="modalTitulo">Nombre del Hotel</h3>
+            <p id="modalRating" style="color:#d97706; font-weight:bold; margin-bottom:10px;">★ 4.5</p>
+            <div class="modal-body">
+                <p id="modalDescripcion">Descripción completa...</p>
+                <br>
+                <p><strong>Ubicación:</strong> <span id="modalDireccion">...</span></p>
+            </div>
+            <a href="https://www.google.com/travel/search?q=cuales%20son%20los%20mejores%20hoteles%20de%20choluteca&g2lb=4965990%2C72471280%2C72573224%2C72647020%2C72686036%2C72803964%2C72882230%2C73064764%2C121529350%2C121608706%2C121738283%2C121762713%2C121921501%2C121951222%2C121954673%2C122005377&hl=en-HN&gl=hn&cs=1&ssta=1&ts=CAESCgoCCAMKAggDEAAaHBIaEhQKBwjqDxAJGB0SBwjqDxAJGB4YATICEAAqCQoFOgNITkwoCA&qs=CAE4BlpyMnCqAW0QASoXIhNsb3MgbWVqb3JlcyBob3RlbGVzKA4yHxABIhtK-8AoU-uQeugR4b0hdevzQIF0CnG-slou_nYyLxACIitjdWFsZXMgc29uIGxvcyBtZWpvcmVzIGhvdGVsZXMgZGUgY2hvbHV0ZXNh&ap=KigKEgky-F1VYIsqQBHLdzSNU85VwBISCcAx-QZzuCpAEct3NL0KyVXASAE&ictx=111&ved=0CAAQ5JsGahcKEwjo_vW2oueWAxUAAAAAHQAAAAAQBQ" 
+               target="_blank" class="btn-reserva-confirmar">Ver Ofertas y Tarifas en Google Travel</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Guía Turística de Choluteca - Portal Oficial de Hospedaje</p>
+    </footer>
+
+    <!-- INTERACTIVIDAD Y FILTROS JAVASCRIPT -->
+    <script>
+        // Lógica de Filtros Rápidos
+        function filtrar(criterio, btn) {
+            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+            btn.classList.add('activo');
+
+            const tarjetas = document.querySelectorAll('.hotel-card');
+
+            tarjetas.forEach(card => {
+                const rating = parseFloat(card.getAttribute('data-rating'));
+                const tienePiscina = card.getAttribute('data-piscina') === 'true';
+                const esCentro = card.getAttribute('data-centro') === 'true';
+
+                if (criterio === 'todos') {
+                    card.style.display = 'flex';
+                } else if (criterio === 'top' && rating >= 4.3) {
+                    card.style.display = 'flex';
+                } else if (criterio === 'piscina' && tienePiscina) {
+                    card.style.display = 'flex';
+                } else if (criterio === 'centro' && esCentro) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Lógica para abrir/cerrar Ventana Modal
+        function abrirModal(titulo, desc, dir, rating) {
+            document.getElementById('modalTitulo').textContent = titulo;
+            document.getElementById('modalDescripcion').textContent = desc;
+            document.getElementById('modalDireccion').textContent = dir;
+            document.getElementById('modalRating').textContent = '★ Puntuación: ' + rating;
+            document.getElementById('modalHotel').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalHotel').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalHotel');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function filtrarPorFormulario() {
+            alert("Búsqueda actualizada para las fechas seleccionadas. Mostrando los mejores hoteles disponibles.");
+        }
+    </script>
+
+</body>
+</html>

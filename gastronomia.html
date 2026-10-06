@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomía - Choluteca</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --color-primario: #9a2c16;
+            --color-primario-oscuro: #6b1b0b;
+            --color-acento: #d97706;
+            --color-texto: #291e1b;
+            --color-texto-suave: #6e5d59;
+            --fondo-pagina: #fdfbf7;
+            --fondo-tarjeta: #ffffff;
+            --fondo-destacado: #f7f0e6;
+            --fondo-footer: #1c1311;
+            --sombra-tarjeta: 0 4px 18px rgba(154, 44, 22, 0.06);
+            --sombra-hover: 0 16px 30px rgba(154, 44, 22, 0.14);
+            --borde-suave: #ede3d5;
+            --radio-borde: 16px;
+            --fuente-titulo: 'Playfair Display', serif;
+            --fuente-cuerpo: 'Plus Jakarta Sans', sans-serif;
+            --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--fondo-pagina);
+            color: var(--color-texto);
+            font-family: var(--fuente-cuerpo);
+            line-height: 1.6;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .seccion { padding: 70px 0; }
+
+        .header {
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--borde-suave);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--color-primario);
+        }
+
+        .logo span {
+            font-size: 0.85rem;
+            color: var(--color-acento);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--color-primario);
+            border-radius: 6px;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--color-primario);
+            margin: 5px 0;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--color-texto-suave);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 18px;
+            border-radius: 25px;
+            transition: var(--transicion);
+        }
+
+        .nav a:hover {
+            color: var(--color-primario);
+            background-color: var(--fondo-destacado);
+        }
+
+        .nav a.active {
+            color: #ffffff;
+            background-color: var(--color-primario);
+        }
+
+        .titulo-seccion {
+            font-family: var(--fuente-titulo);
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--color-primario);
+            text-align: center;
+            margin-bottom: 12px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .texto-introduccion p {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--color-texto-suave);
+        }
+
+        .grid-tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 35px;
+        }
+
+        .tarjeta {
+            background-color: var(--fondo-tarjeta);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            box-shadow: var(--sombra-tarjeta);
+            transition: var(--transicion);
+            border: 1px solid var(--borde-suave);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-hover);
+            border-color: var(--color-acento);
+        }
+
+        .tarjeta::before {
+            content: '🍽️ Sabor Tradicional';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--color-primario);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            z-index: 2;
+        }
+
+        .imagen-contenedor {
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .imagen-contenedor img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .tarjeta:hover .imagen-contenedor img { transform: scale(1.06); }
+
+        .tarjeta-info {
+            padding: 26px 22px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .tarjeta-info h3 {
+            font-family: var(--fuente-titulo);
+            font-size: 1.4rem;
+            color: var(--color-primario-oscuro);
+            margin-bottom: 10px;
+            border-bottom: 1px dashed var(--borde-suave);
+            padding-bottom: 8px;
+        }
+
+        .tarjeta-info p {
+            color: var(--color-texto-suave);
+            font-size: 0.95rem;
+        }
+
+        .contenido-dos-columnas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .columna {
+            background: white;
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            border: 1px solid var(--borde-suave);
+        }
+
+        .columna-contenido { padding: 20px; }
+
+        .footer {
+            background-color: var(--fondo-footer);
+            color: #b5a8a5;
+            padding-top: 60px;
+            margin-top: 50px;
+            border-top: 3px solid var(--color-acento);
+        }
+
+        .footer-contenido {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--fuente-titulo);
+            color: var(--color-acento);
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col a { color: #b5a8a5; text-decoration: none; }
+
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background-color: #0f0a09;
+            font-size: 0.875rem;
+            border-top: 1px solid #2d211e;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .nav.abierto { max-height: 350px; }
+            .nav ul {
+                flex-direction: column;
+                padding-top: 15px;
+                gap: 8px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-box">
+                <img src="img/logo de choluteca.png" alt="Escudo del Instituto José Cecilio del Valle">
+            </div>
+            <div class="logo-texto">
+                <h1>Choluteca</h1>
+                <span>Sultana del Sur</span>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir navegación">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav" id="navPrincipal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="historia.html">Historia</a></li>
+                <li><a href="que-visitar.html">Qué Visitar</a></li>
+                <li><a href="gastronomia.html" class="active">Gastronomía</a></li>
+                <li><a href="hoteles.html">Hoteles</a></li>
+                <li><a href="balnearios.html">Balnearios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <section class="seccion contenedor">
+        <h2 class="titulo-seccion">Sabor Tradicional Sureño</h2>
+        <div class="texto-introduccion">
+            <p>La gastronomía de Choluteca es una fusión única entre la herencia ganadera colonial, la riqueza agrícola de los valles del sur y la abundante pesca del Golfo de Fonseca. Caracterizada por sabores intensos, el uso de maíz criollo, lácteos artesanales y mariscos frescos, cada platillo representa el orgullo e identidad cultural de la Sultana del Sur.</p>
+        </div>
+
+        <div class="grid-tarjetas">
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/roquillas.png" alt="Rosquillas y Tostones" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <h3>Rosquillas y Tostones</h3>
+                    <p>Famosas a nivel nacional por su crujiente textura, preparadas artesanalmente en hornos de barro con maíz y cuajada.</p>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/receta-sopa-de-gallina.png" alt="Sopa de Gallina India" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <h3>Sopa de Gallina India</h3>
+                    <p>Plato emblemático de las familias sureñas, acompañado de verduras frescas, arroz y tortillas hechas a mano.</p>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/Sopa-marinera.png" alt="Sopa marinera y Pescado Frito" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <h3>Sopa marinera y Pescado Frito</h3>
+                    <p>Directo del mar a la mesa: curiles, camarones, jaibas y pescado frito al estilo costeño con tajadas de plátano.</p>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/lacteos.png" alt="Lácteos y Quesillo" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <h3>Lácteos </h3>
+                    <p>Famosos quesos ahumados, queso seco, mantequilla crema y quesillos frescos tradicionales de la zona ganadera.</p>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/mondongo.png" alt="Sopa de Mondongo" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <h3>Sopa de Mondongo Sureña</h3>
+                    <p>Preparada minuciosamente con panza de res, patas y abundante verdura local, sazonada con finas hierbas y especias criollas.</p>
+                </div>
+            </article>
+
+            <article class="tarjeta">
+                <div class="imagen-contenedor">
+                    <img src="img/posol.png" alt="Pozol y Bebidas" loading="lazy">
+                </div>
+                <div class="tarjeta-info">
+                    <h3>Pozol y Bebidas Locales</h3>
+                    <p>Refrescante pozol helado a base de maíz cocido, leche y canela, o la tradicional chicha de maíz fermentada para el calor sureño.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="seccion contenedor">
+        <h2 class="titulo-seccion">Repostería y Dulces Tradicionales</h2>
+        <div class="contenido-dos-columnas">
+            <article class="columna">
+                <div class="imagen-contenedor">
+                    <img src="img/roquillas.png" alt="Pan de Rosa y Quesadillas" loading="lazy">
+                </div>
+                <div class="columna-contenido">
+                    <h3>Pan de Rosa y Quesadillas</h3>
+                    <p>Variedad de marquesotes, hojaldres y las emblemáticas quesadillas horneadas a base de maíz, queso y crema, ideales para el café de la tarde.</p>
+                </div>
+            </article>
+
+            <article class="columna">
+                <div class="imagen-contenedor">
+                    <img src="img/dulce.png" alt="Conservas y Dulces" loading="lazy">
+                </div>
+                <div class="columna-contenido">
+                    <h3>Conservas y Dulce en Miel</h3>
+                    <p>Deliciosas conservas artesanales de leche, dulce de coyol en miel, toronja en miel y conservas de ajonjolí elaboradas con recetas tradicionales.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="contenedor footer-contenido">
+            <div class="footer-col">
+                <h4>Choluteca Turística</h4>
+                <p>Disfruta de la mejor cocina tradicional del sur.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="historia.html">Historia</a></li>
+                    <li><a href="que-visitar.html">Qué Visitar</a></li>
+                    <li><a href="gastronomia.html">Gastronomía</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="hoteles.html">Hoteles</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>Email: info@turismocholuteca.hn</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Turismo Choluteca - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navPrincipal = document.getElementById('navPrincipal');
+
+        navToggle.addEventListener('click', () => {
+            navPrincipal.classList.toggle('abierto');
+        });
+    </script>
+</body>
+
+</html>
